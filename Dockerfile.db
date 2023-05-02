@@ -1,0 +1,12 @@
+from mariadb:latest
+
+Run apt-get install -y mariadb-client &&\
+    apt-get update && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+COPY index.php /var/www/html/index.php
+COPY redlock-db.sql /docker-entrypoint-initdb.d/redlock-db.sql
+
+ENV MYSQL_ROOT_PASSWORD=root
+ENV MYSQL_DATABASE=Redlock
